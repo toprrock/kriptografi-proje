@@ -20,7 +20,6 @@ Bu yol haritası, Python programlama dili kullanılarak temel kriptografi algori
    ```
 3. Test dosyalarını ve örnek veri girdilerini oluşturun (metin dosyaları vb.).
 
-## Temel Bileşenlerin Geliştirilmesi
 
 ### Caesar Şifreleme
 ```python
@@ -28,23 +27,14 @@ def caesar_encrypt(text, shift):
     result = ""
     for char in text:
         if char.isalpha():
-            offset = 65 if char.isupper() else 97
-            result += chr((ord(char) - offset + shift) % 26 + offset)
-        else:
-            result += char
-    return result
-
-def caesar_decrypt(text, shift):
-    return caesar_encrypt(text, -shift)
-```
-### Caesar Şifreleme örnek
-
-def caesar_encrypt(text, shift):
-    result = ""
-    for char in text:
-        if char.isalpha():
-            offset = 65 if char.isupper() else 97
-            result += chr((ord(char) - offset + shift) % 26 + offset)
+            shifted = ord(char) + shift
+            if char.islower():
+                if shifted > ord('z'):
+                    shifted -= 26
+            elif char.isupper():
+                if shifted > ord('Z'):
+                    shifted -= 26
+            result += chr(shifted)
         else:
             result += char
     return result
@@ -52,104 +42,67 @@ def caesar_encrypt(text, shift):
 def caesar_decrypt(text, shift):
     return caesar_encrypt(text, -shift)
 
-# Örnek kullanım
-text = "Merhaba Dünya!"
-sifreli = caesar_encrypt(text, 3)
-cozulmus = caesar_decrypt(sifreli, 3)
-
+# Örnek
+sifreli = caesar_encrypt("Merhaba", 3)
 print("Şifreli:", sifreli)
-print("Çözülmüş:", cozulmus)
+print("Çözülmüş:", caesar_decrypt(sifreli, 3))
+
 ```
+
 
 ### Vigenère Şifreleme
-```python
-def vigenere_encrypt(plaintext, key):
-    key = key.upper()
-    ciphertext = ""
-    for i, char in enumerate(plaintext):
-        if char.isalpha():
-            offset = 65 if char.isupper() else 97
-            key_char = ord(key[i % len(key)]) - 65
-            ciphertext += chr((ord(char) - offset + key_char) % 26 + offset)
-        else:
-            ciphertext += char
-    return ciphertext
 ```
-###
-def vigenere_encrypt(plaintext, key):
-    key = key.upper()
-    ciphertext = ""
-    for i, char in enumerate(plaintext):
+def vigenere_encrypt(text, key):
+    result = ""
+    key = key.lower()
+    for i, char in enumerate(text):
         if char.isalpha():
-            offset = 65 if char.isupper() else 97
-            key_char = ord(key[i % len(key)]) - 65
-            ciphertext += chr((ord(char) - offset + key_char) % 26 + offset)
+            shift = ord(key[i % len(key)]) - ord('a')
+            result += caesar_encrypt(char, shift)
         else:
-            ciphertext += char
-    return ciphertext
+            result += char
+    return result
 
-# Örnek kullanım
-mesaj = "Merhaba Dünya"
-anahtar = "ANAHTAR"
-sifreli = vigenere_encrypt(mesaj, anahtar)
+# Caesar fonksiyonu yukarıdan kullanılmalı
 
-print("Şifreli mesaj:", sifreli)
+# Örnek
+print("Vigenère Şifreli:", vigenere_encrypt("Merhaba", "anahtar"))
 ```
-
 
 
 ### AES ile Simetrik Şifreleme
-```python
-from cryptography.fernet import Fernet
+```from cryptography.fernet import Fernet
 
-# Anahtar üret
+# Anahtar oluştur ve kullan
 key = Fernet.generate_key()
-cipher = Fernet(key)
+f = Fernet(key)
 
-# Şifreleme
-token = cipher.encrypt(b"gizli mesaj")
-# Deşifre
-original = cipher.decrypt(token)
+# Mesaj şifrele
+sifreli = f.encrypt(b"gizli mesaj")
+cozulmus = f.decrypt(sifreli)
+
+print("Şifreli:", sifreli.decode())
+print("Çözülmüş:", cozulmus.decode())
+
 ```
 
-from cryptography.fernet import Fernet
 
-key = Fernet.generate_key()
-cipher = Fernet(key)
-
-# Şifreleme
-token = cipher.encrypt(b"gizli mesaj")
-# Deşifre
-original = cipher.decrypt(token)
-
-print("Anahtar:", key.decode())
-print("Şifreli:", token.decode())
-print("Çözülmüş:", original.decode())
-
-```
 
 
 
 ### SHA256 ve HMAC ile İmza
 ```python
-import hmac
 import hashlib
-
-message = b"Mesaj metni"
-key = b"gizli_anahtar"
-signature = hmac.new(key, message, hashlib.sha256).hexdigest()
-```
-###
 import hmac
-import hashlib
 
-message = b"Mesaj metni"
-key = b"gizli_anahtar"
-signature = hmac.new(key, message, hashlib.sha256).hexdigest()
+mesaj = b"deneme"
+anahtar = b"anahtar"
 
-print("HMAC İmza:", signature)
+imza = hmac.new(anahtar, mesaj, hashlib.sha256).hexdigest()
+
+print("HMAC SHA256:", imza)
+
 ```
-
 
 
 
