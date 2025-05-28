@@ -1,10 +1,8 @@
-# ROADMAP.md: Python ile Temel Kriptografi Uygulamaları Geliştirme ve Test Etme
 
 ## Giriş
 Bu yol haritası, Python programlama dili kullanılarak temel kriptografi algoritmalarının nasıl geliştirileceği ve test edileceğine dair adım adım bir rehber sunar. Bu projede, klasik şifreleme yöntemleri (Caesar, Vigenère), modern simetrik şifreleme (AES) ve temel imzalama algoritmaları (SHA256 + HMAC) uygulanacaktır. Bu bilgiler eğitim ve araştırma amaçlıdır.
 
 ## Ön Koşullar
-- **Python 3.x**
 - **Kütüphaneler**:
   - `cryptography`: Modern şifreleme algoritmaları için (`pip install cryptography`)
   - `hashlib` ve `hmac`: Python’un yerleşik modülleri
