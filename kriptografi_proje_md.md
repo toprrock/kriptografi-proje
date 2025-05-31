@@ -196,7 +196,7 @@ Visual Studio Code, PyCharm veya Thonny gibi bir editör (ya da basit bir metin 
 Terminal (Komut Satırı) ya da editörün kendi “Run” tuşu
 
  RSA İçin Test Ortamı Nasıl Kurulur?
- Adım 1: Python yüklü mü kontrol et
+-**Adım 1: Python yüklü mü kontrol et-**
 Terminale şunu yaz:
 
 bash
@@ -205,13 +205,13 @@ Düzenle
 python --version
 Eğer bir versiyon çıkıyorsa her şey yolunda.
 
- Adım 2: Gerekli kütüphaneyi kur
+   -**Adım 2: Gerekli kütüphaneyi kur-**
 bash
 Kopyala
 Düzenle
 pip install rsa
- Adım 3: Kodları .py dosyası olarak yaz
+  -**Adım 3: Kodları .py dosyası olarak yaz-**
 ##RSA işlemlerini yapacağın kodları bir .py dosyasına yaz (örneğin: rsa_ornek.py).
 
- Adım 4: Test etmek için bir mesaj seç
+   -**Adım 4: Test etmek için bir mesaj seç-**
 ##Örneğin: "Selam Dünya!" gibi bir metni şifreleyip çözerek test et.
