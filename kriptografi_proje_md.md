@@ -210,8 +210,8 @@ bash
 Kopyala
 Düzenle
 pip install rsa
-✅ Adım 3: Kodları .py dosyası olarak yaz
+ Adım 3: Kodları .py dosyası olarak yaz
 ##RSA işlemlerini yapacağın kodları bir .py dosyasına yaz (örneğin: rsa_ornek.py).
 
-✅ Adım 4: Test etmek için bir mesaj seç
+ Adım 4: Test etmek için bir mesaj seç
 ##Örneğin: "Selam Dünya!" gibi bir metni şifreleyip çözerek test et.
